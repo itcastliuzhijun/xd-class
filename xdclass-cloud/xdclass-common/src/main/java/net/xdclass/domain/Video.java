@@ -18,6 +18,17 @@ public class Video {
     private Date createTime;
     private Double point;
 
+    //测试
+    private String serveInfo;
+
+    public String getServeInfo() {
+        return serveInfo;
+    }
+
+    public void setServeInfo(String serveInfo) {
+        this.serveInfo = serveInfo;
+    }
+
     public Integer getId() {
         return id;
     }
