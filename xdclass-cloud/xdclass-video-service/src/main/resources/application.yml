@@ -4,6 +4,12 @@ server:
 spring:
   application:
     name: xdclass-video-service
+  zipkin:
+    base-url: http://120.27.220.145:9411/
+    discovery-client-enabled: false
+  sleuth:
+    sampler:
+      probability: 1.0
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
