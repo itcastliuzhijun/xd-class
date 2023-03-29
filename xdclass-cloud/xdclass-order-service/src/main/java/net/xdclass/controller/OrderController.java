@@ -4,8 +4,10 @@ import net.xdclass.domain.Video;
 import net.xdclass.domain.VideoOrder;
 import net.xdclass.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("api/v1/video_order")
+@RefreshScope
 public class OrderController {
 
 
@@ -37,6 +40,9 @@ public class OrderController {
 
     @Autowired
     private VideoService videoService;
+
+    @Value("${video.title}")
+    private String videoTitle;
 
     @RequestMapping("save")
     public Object save(int videoId){
@@ -53,7 +59,7 @@ public class OrderController {
 
         VideoOrder videoOrder = new VideoOrder();
         videoOrder.setVideoId(video.getId());
-        videoOrder.setVideoTitle(video.getTitle());
+        videoOrder.setVideoTitle(videoTitle);
         videoOrder.setCreateTime(new Date());
 
         videoOrder.setServerInfo(video.getServeInfo());
